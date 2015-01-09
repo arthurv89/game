@@ -1,5 +1,6 @@
-package nl.arthurvlug.game;
+package nl.arthurvlug.game.level;
 
+import nl.arthurvlug.game.Updatable;
 import nl.arthurvlug.game.gui.Game;
 
 import com.jme3.collision.CollisionResults;
@@ -52,8 +53,8 @@ public class Enemy implements Updatable {
 		return enemy;
 	}
 
-	private void setRandomLocation(final Geometry movingBox) {
-		movingBox.setLocalTranslation(
+	private void setRandomLocation(final Geometry geometry) {
+		geometry.setLocalTranslation(
 				(float) -(Math.random()*10),
 				(float) -(Math.random()*10),
 				(float) -(Math.random()*50 + 50));

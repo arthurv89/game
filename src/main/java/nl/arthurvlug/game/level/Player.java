@@ -1,4 +1,4 @@
-package nl.arthurvlug.game;
+package nl.arthurvlug.game.level;
 
 import org.springframework.stereotype.Component;
 

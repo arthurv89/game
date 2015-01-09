@@ -1,10 +1,7 @@
 package nl.arthurvlug.game.gui;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import nl.arthurvlug.game.Enemy;
-import nl.arthurvlug.game.Player;
+import nl.arthurvlug.game.level.Level;
+import nl.arthurvlug.game.level.Player;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -19,18 +16,11 @@ public class Game extends SimpleApplication {
 	@Autowired private Player player;
 	@Autowired private Crosshair crosshair;
 	@Autowired private Gui gui;
-	private List<Enemy> enemies = new ArrayList<Enemy>();
+	@Autowired private Level level;
 
 	public void simpleInitApp() {
 		gui.initialize();
-		newEnemy();
-	}
-
-	public void newEnemy() {
-		Enemy enemy = new Enemy(this, player);
-		enemy.initialize();
-		
-		enemies.add(enemy);
+		level.initialize();
 	}
 	
 	public AppSettings getSettings() {
@@ -43,9 +33,7 @@ public class Game extends SimpleApplication {
 	
 	@Override
 	public void simpleUpdate(final float tpf) {
-		for(Enemy enemy : enemies) {
-			enemy.simpleUpdate(tpf);
-		}
+		level.simpleUpdate(tpf);
 	}
 	
 	public static void main(final String[] args) {

@@ -1,6 +1,6 @@
 package nl.arthurvlug.game.gui;
 
-import nl.arthurvlug.game.Player;
+import nl.arthurvlug.game.level.Player;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

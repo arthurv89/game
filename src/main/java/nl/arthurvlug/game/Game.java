@@ -1,7 +1,7 @@
-package nl.arthurvlug.game.gui;
+package nl.arthurvlug.game;
 
+import nl.arthurvlug.game.gui.Gui;
 import nl.arthurvlug.game.level.Level;
-import nl.arthurvlug.game.level.Player;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -13,8 +13,6 @@ import com.jme3.system.AppSettings;
 
 @Component
 public class Game extends SimpleApplication {
-	@Autowired private Player player;
-	@Autowired private Crosshair crosshair;
 	@Autowired private Gui gui;
 	@Autowired private Level level;
 
@@ -23,17 +21,21 @@ public class Game extends SimpleApplication {
 		level.initialize();
 	}
 	
+	@Override
+	public void simpleUpdate(final float tpf) {
+		level.simpleUpdate(tpf);
+	}
+	
+	
+	
+	
+	
 	public AppSettings getSettings() {
 		return settings;
 	}
 
 	public Gui getGui() {
 		return gui;
-	}
-	
-	@Override
-	public void simpleUpdate(final float tpf) {
-		level.simpleUpdate(tpf);
 	}
 	
 	public static void main(final String[] args) {

@@ -3,7 +3,7 @@ package nl.arthurvlug.game.level;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Player {
+public class PlayerStatus {
 	private int bullets = 10;
 
 	public void decreaseBullet() {

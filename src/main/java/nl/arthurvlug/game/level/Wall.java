@@ -1,6 +1,6 @@
 package nl.arthurvlug.game.level;
 
-import nl.arthurvlug.game.gui.Game;
+import nl.arthurvlug.game.Game;
 
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;

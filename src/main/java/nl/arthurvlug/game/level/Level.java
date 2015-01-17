@@ -4,36 +4,43 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import nl.arthurvlug.game.Game;
 import nl.arthurvlug.game.Updatable;
-import nl.arthurvlug.game.gui.Game;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.jme3.bullet.BulletAppState;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.shape.Box;
 
 @Component
 public class Level implements Updatable {
 	@Autowired private Game game;
-	@Autowired private Player player;
+	@Autowired private PlayerStatus playerStatus;
 
-	private List<Enemy> enemies = new ArrayList<Enemy>();
+	private final List<Enemy> enemies = new ArrayList<Enemy>();
 	
 	public void initialize() {
+        BulletAppState bulletAppState = new BulletAppState();
+        game.getStateManager().attach(bulletAppState);
+
+		PhysicsTestHelper.createPhysicsTestWorld(game.getRootNode(), game.getAssetManager(), bulletAppState.getPhysicsSpace());
+
+        
 		newEnemy();
 		
-		List<Wall> walls = Arrays.asList(
+		final List<Wall> walls = Arrays.asList(
 				new Wall(new Box(5, 50, 50), new Vector3f(30, -20, -40), game)
 		);
-		for (Wall wall : walls) {
+		for (final Wall wall : walls) {
 			game.getRootNode().attachChild(wall);
 		}
 	}
 
 
 	private void newEnemy() {
-		Enemy enemy = new Enemy(game, player);
+		final Enemy enemy = new Enemy(game, playerStatus);
 		enemy.initialize();
 		
 		enemies.add(enemy);
@@ -41,8 +48,8 @@ public class Level implements Updatable {
 
 
 	@Override
-	public void simpleUpdate(float tpf) {
-		for(Enemy enemy : enemies) {
+	public void simpleUpdate(final float tpf) {
+		for(final Enemy enemy : enemies) {
 			enemy.simpleUpdate(tpf);
 		}
 	}

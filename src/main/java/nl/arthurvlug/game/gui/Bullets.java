@@ -1,6 +1,7 @@
 package nl.arthurvlug.game.gui;
 
-import nl.arthurvlug.game.level.Player;
+import nl.arthurvlug.game.Game;
+import nl.arthurvlug.game.level.PlayerStatus;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,7 +12,7 @@ import com.jme3.font.BitmapText;
 @Component
 public class Bullets {
 	@Autowired private Layout layout;
-	@Autowired private Player player;
+	@Autowired private PlayerStatus playerStatus;
 	@Autowired private Game game;
 	private BitmapText bulletsLabel;
 
@@ -26,7 +27,7 @@ public class Bullets {
 	}
 
 	public void refresh() {
-		bulletsLabel.setText(player.getBullets() + " bullets");
+		bulletsLabel.setText(playerStatus.getBullets() + " bullets");
 		bulletsLabel.setLocalTranslation(
 				game.getSettings().getWidth() - bulletsLabel.getLineWidth() - 10,
 				game.getSettings().getHeight() - bulletsLabel.getLineHeight(),

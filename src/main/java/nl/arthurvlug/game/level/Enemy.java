@@ -1,7 +1,7 @@
 package nl.arthurvlug.game.level;
 
+import nl.arthurvlug.game.Game;
 import nl.arthurvlug.game.Updatable;
-import nl.arthurvlug.game.gui.Game;
 
 import com.jme3.collision.CollisionResults;
 import com.jme3.input.MouseInput;
@@ -17,12 +17,12 @@ public class Enemy implements Updatable {
 	private static final String LEFT_CLICK = "LeftClick";
 	
 	private final Game game;
-	private final Player player;
+	private final PlayerStatus playerStatus;
 	private Geometry boundingBox;
 	
-	public Enemy(Game game, Player player) {
+	public Enemy(Game game, PlayerStatus playerStatus) {
 		this.game = game;
-		this.player = player;
+		this.playerStatus = playerStatus;
 	}
 	
 	public void initialize() {
@@ -67,10 +67,10 @@ public class Enemy implements Updatable {
 			public void onAction(final String name, final boolean isPressed, final float tpf) {
 				if (isPressed) {
 					if (isHit()) {
-						player.incrementBullets(5);
+						playerStatus.incrementBullets(5);
 						setRandomLocation(boundingBox);
 					} else {
-						player.decreaseBullet();
+						playerStatus.decreaseBullet();
 					}
 					game.getGui().refreshBullets();
 				}
